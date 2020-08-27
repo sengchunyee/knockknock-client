@@ -3,7 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/Toolbar";
 import App from "../App";
 import Button from "@material-ui/core/Button";
-import Link from "react-router-dom/Link";
+import { Link } from "react-router-dom";
 
 class NavBar extends Component {
   render() {
