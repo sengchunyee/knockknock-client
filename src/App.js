@@ -5,7 +5,7 @@ import home from "./pages/home";
 import login from "./pages/login";
 import signUp from "./pages/signup";
 import NavBar from "./components/NavBar";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 
 const theme = createMuiTheme({
