@@ -10,7 +10,8 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import themeFile from "./util/theme";
 import jwtDecode from "jwt-decode";
 import AuthRoute from "./components/AuthRoute";
-
+import { Provider } from "react-redux";
+import store from "./redux/store";
 const theme = createMuiTheme(themeFile);
 
 const token = localStorage.getItem("idToken");
@@ -19,8 +20,8 @@ if (token) {
   const decodedToken = jwtDecode(token);
   console.log("asd", decodedToken);
   if (decodedToken.exp * 1000 < Date.now()) {
-    window.location.href = "/login";
     authenticated = false;
+    window.location.href = "/login";
   } else {
     authenticated = true;
   }
@@ -28,7 +29,8 @@ if (token) {
 function App() {
   return (
     <MuiThemeProvider theme={theme}>
-      <div className="App">
+      <Provider store={store}>
+        {/* <div className="App"> */}
         <Router>
           <NavBar />
           <div className="container">
@@ -49,7 +51,8 @@ function App() {
             </Switch>
           </div>
         </Router>
-      </div>
+        {/* </div> */}
+      </Provider>
     </MuiThemeProvider>
   );
 }

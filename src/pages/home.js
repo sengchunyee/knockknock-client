@@ -3,7 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Post from "../components/Post";
 
-export class home extends Component {
+class home extends Component {
   componentDidMount() {
     axios
       .get("/allPosts")
