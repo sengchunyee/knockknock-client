@@ -18,19 +18,23 @@ class login extends Component {
     super();
     this.state = { email: "", password: "", loading: false, errors: {} };
   }
-  handleSubmit = (event) => {
-    event.preventDefault();
-    const userData = { email: this.state.email, password: this.state.password };
-    this.props.loginUser(userData, this.props.history);
-  };
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.UI.errors) {
       this.setState({ errors: nextProps.UI.errors });
     }
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    const userData = { email: this.state.email, password: this.state.password };
+    this.props.loginUser(userData, this.props.history);
+  };
+
   handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
+
   render() {
     const {
       classes,
