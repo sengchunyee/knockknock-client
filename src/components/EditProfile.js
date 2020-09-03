@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import { editUserProfile } from "../redux/actions/userAction";
-import { Tooltip, IconButton } from "@material-ui/core";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -11,6 +10,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import Dialog from "@material-ui/core/Dialog";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import MyButton from "../util/MyButton";
 
 const styles = (theme) => ({ ...theme.spreadIt, button: { float: "right" } });
 
@@ -61,15 +61,15 @@ class EditProfile extends Component {
     const { classes } = this.props;
     return (
       <Fragment>
-        <Tooltip title="Edit Details" placement="top">
-          <IconButton
-            onClick={this.toggleOpen}
-            className={classes.button}
-            id="profileDialog"
-          >
-            <EditIcon color="primary" />
-          </IconButton>
-        </Tooltip>
+        <MyButton
+          tip="Edit Details"
+          placement="bottom"
+          onClick={this.toggleOpen}
+          btnClassName={classes.button}
+        >
+          <EditIcon color="primary" />
+        </MyButton>
+
         <Dialog
           open={this.state.open}
           onClose={this.toggleClose}

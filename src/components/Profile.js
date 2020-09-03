@@ -5,18 +5,17 @@ import Button from "@material-ui/core/Button";
 import { connect } from "react-redux";
 import MuiLink from "@material-ui/core/Link";
 import { Link } from "react-router-dom";
-import { Typography, IconButton } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import CalendarTodayIcon from "@material-ui/icons/CalendarToday";
 import Paper from "@material-ui/core/Paper";
 import LinkIcon from "@material-ui/icons/Link";
 import EditIcon from "@material-ui/icons/Edit";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
-import Tooltip from "@material-ui/core/Tooltip";
 import KeyBoardReturn from "@material-ui/icons/KeyboardReturn";
 import dayjs from "dayjs";
 import { logoutUser, uploadImage } from "../redux/actions/userAction";
 import EditProfile from "../components/EditProfile";
-import Avatar from "@material-ui/core/Avatar";
+import MyButton from "../util/MyButton";
 const styles = (theme) => ({ ...theme.spreadIt });
 
 class Profile extends Component {
@@ -58,11 +57,14 @@ class Profile extends Component {
                 onChange={this.handleImageChange}
                 hidden="hidden"
               />
-              <Tooltip title="Edit Profile Picture" placement="top">
-                <IconButton onClick={this.handleEditPicture}>
-                  <EditIcon color="primary" />
-                </IconButton>
-              </Tooltip>
+
+              <MyButton
+                tip="Edit Profile Picture"
+                onClick={this.handleEditPicture}
+                className="button"
+              >
+                <EditIcon color="primary" />
+              </MyButton>
             </div>
             <hr />
             <div className="profile-details">
@@ -97,11 +99,14 @@ class Profile extends Component {
               <CalendarTodayIcon color="primary" />{" "}
               <span>Joined {dayjs(createdAt).format("MMM YYYY")}</span>
             </div>
-            <Tooltip title="Logout" placement="top-start">
-              <IconButton onClick={this.handleLogout}>
-                <KeyBoardReturn color="primary" />
-              </IconButton>
-            </Tooltip>
+            <MyButton
+              tip="Logout"
+              onClick={this.handleLogout}
+              className="button"
+              placement="bottom"
+            >
+              <KeyBoardReturn color="primary" />
+            </MyButton>
             <EditProfile />
           </div>
         </Paper>
