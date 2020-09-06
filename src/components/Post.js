@@ -14,9 +14,10 @@ import MyButton from "../util/MyButton";
 import ChatIcon from "@material-ui/icons/Chat";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Favorite from "@material-ui/icons/Favorite";
+import DeletePost from "../components/DeletePost";
 
 const styles = {
-  card: { display: "flex", marginBottom: 20 },
+  card: { display: "flex", marginBottom: 20, position: "relative" },
   image: { minWidth: 200 },
   content: { padding: 25, objectFit: "cover" },
 };
@@ -39,10 +40,22 @@ class Post extends Component {
   };
   render() {
     dayjs.extend(relativeTime);
+
     const {
       classes,
-      post: { body, createdAt, userImage, userHandle, commentCount, likeCount },
-      user: { authenticated },
+      post: {
+        body,
+        createdAt,
+        userImage,
+        userHandle,
+        commentCount,
+        likeCount,
+        postId,
+      },
+      user: {
+        authenticated,
+        credentials: { handle },
+      },
     } = this.props;
     const likeButton = !authenticated ? (
       <Link to="/login">
@@ -59,6 +72,10 @@ class Post extends Component {
         <FavoriteBorder color="primary" />
       </MyButton>
     );
+    const deleteButton =
+      authenticated && userHandle === handle ? (
+        <DeletePost postId={postId} />
+      ) : null;
     return (
       <Card className={classes.card}>
         <CardMedia
@@ -75,6 +92,7 @@ class Post extends Component {
           >
             {userHandle}
           </Typography>
+          {deleteButton}
           <Typography variant="body2" color="textSecondary">
             {dayjs(createdAt).fromNow()}
           </Typography>
