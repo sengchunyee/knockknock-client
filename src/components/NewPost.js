@@ -19,7 +19,7 @@ const styles = (theme) => ({
     position: "relative",
     left: "85%",
     marginTop: "10px",
-    marginBottom: "10px",
+    marginBottom: "2px",
   },
   progressSpinner: { position: "absolute" },
   closeButton: { position: "absolute", left: "90%" },

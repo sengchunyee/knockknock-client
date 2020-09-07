@@ -15,6 +15,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
 import Favorite from "@material-ui/icons/Favorite";
 import DeletePost from "../components/DeletePost";
+import PostDialog from "../components/PostDialog";
 
 const styles = {
   card: { display: "flex", marginBottom: 20, position: "relative" },
@@ -40,7 +41,6 @@ class Post extends Component {
   };
   render() {
     dayjs.extend(relativeTime);
-
     const {
       classes,
       post: {
@@ -104,6 +104,8 @@ class Post extends Component {
           <MyButton tip="comments">
             <ChatIcon color="primary"></ChatIcon>
           </MyButton>
+          <span>{commentCount} comments</span>
+          <PostDialog postId={postId} userHandle={userHandle} />
         </CardContent>
       </Card>
     );

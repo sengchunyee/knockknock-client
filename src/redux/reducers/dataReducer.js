@@ -1,10 +1,12 @@
 import {
+  SET_POST,
   SET_POSTS,
   LIKE_POST,
   UNLIKE_POST,
   LOADING_DATA,
   DELETE_POST,
   NEW_POST,
+  STOP_LOADING_UI,
 } from "../types";
 
 const initialState = {
@@ -17,6 +19,8 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case SET_POSTS:
       return { ...state, posts: action.payload, loading: false };
+    case SET_POST:
+      return { ...state, post: action.payload };
     case LIKE_POST:
     case UNLIKE_POST:
       let index = state.posts.findIndex(
