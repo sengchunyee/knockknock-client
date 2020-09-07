@@ -9,6 +9,7 @@ import MyButton from "../util/MyButton";
 import AddIcon from "@material-ui/icons/Add";
 import HomeIcon from "@material-ui/icons/Home";
 import Notification from "@material-ui/icons/Notifications";
+import NewPost from "../components/NewPost";
 const styles = (theme) => ({ ...theme.spreadIt });
 
 class NavBar extends Component {
@@ -19,9 +20,7 @@ class NavBar extends Component {
         <ToolBar className="nav-container">
           {authenticated ? (
             <Fragment>
-              <MyButton tip="Creata a post">
-                <AddIcon />
-              </MyButton>
+              <NewPost />
               <Link to="/">
                 <MyButton tip="Home">
                   <HomeIcon />
