@@ -15,10 +15,11 @@ import { Link } from "react-router-dom";
 import ChatIcon from "@material-ui/icons/Chat";
 import Grid from "@material-ui/core/Grid";
 import LikeButton from "./LikeButton";
+import Comments from "./Comments";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
-  invisibleSeperator: { border: "none", margin: "4" },
+
   userImage: {
     height: 200,
     maxWidth: 200,
@@ -53,7 +54,6 @@ class PostDialog extends Component {
 
   componentDidMount() {
     this.props.getPost(this.props.postId);
-    console.log("dialog=", this.props);
   }
   render() {
     const {
@@ -66,11 +66,10 @@ class PostDialog extends Component {
         commentCount,
         userHandle,
         userImage,
+        comments,
       },
       UI: { loading },
     } = this.props;
-    console.log("inrender=", this.props);
-
     const { open } = this.state;
     const dialog = loading ? (
       <div className={classes.spinnerDiv}>
@@ -103,6 +102,8 @@ class PostDialog extends Component {
           </MyButton>
           <span>{commentCount} comments</span>
         </Grid>
+        <hr className={classes.visibleSeperator} />
+        <Comments comments={comments} />
       </Grid>
     );
     return (

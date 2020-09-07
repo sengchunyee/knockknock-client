@@ -39,7 +39,6 @@ class Post extends Component {
         credentials: { handle },
       },
     } = this.props;
-    console.log("postrender", this.props);
     const deleteButton =
       authenticated && userHandle === handle ? (
         <DeletePost postId={postId} />

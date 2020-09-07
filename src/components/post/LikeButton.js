@@ -19,7 +19,6 @@ class LikeButton extends Component {
     else return false;
   };
   likePost = () => {
-    console.log(this.props.postId);
     this.props.likePost(this.props.postId);
   };
   unlikePost = () => {
