@@ -5,11 +5,10 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import MyButton from "../util/MyButton";
-import AddIcon from "@material-ui/icons/Add";
+import MyButton from "../../util/MyButton";
 import HomeIcon from "@material-ui/icons/Home";
 import Notification from "@material-ui/icons/Notifications";
-import NewPost from "../components/NewPost";
+import NewPost from "../post/NewPost";
 const styles = (theme) => ({ ...theme.spreadIt });
 
 class NavBar extends Component {

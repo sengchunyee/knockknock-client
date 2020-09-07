@@ -3,29 +3,18 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { getPost } from "../redux/actions/dataAction";
-import AddIcon from "@material-ui/icons/Add";
+import { getPost } from "../../redux/actions/dataAction";
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import dayjs from "dayjs";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { likePost, unlikePost } from "../redux/actions/dataAction";
 import ChatIcon from "@material-ui/icons/Chat";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import Favorite from "@material-ui/icons/Favorite";
-import DeletePost from "../components/DeletePost";
 import Grid from "@material-ui/core/Grid";
+import LikeButton from "./LikeButton";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -64,6 +53,7 @@ class PostDialog extends Component {
 
   componentDidMount() {
     this.props.getPost(this.props.postId);
+    console.log("dialog=", this.props);
   }
   render() {
     const {
@@ -79,6 +69,8 @@ class PostDialog extends Component {
       },
       UI: { loading },
     } = this.props;
+    console.log("inrender=", this.props);
+
     const { open } = this.state;
     const dialog = loading ? (
       <div className={classes.spinnerDiv}>
@@ -104,6 +96,12 @@ class PostDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeperator} />
           <Typography variant="body1">{body}</Typography>
+          <LikeButton postId={postId} />
+          <span>{likeCount} Likes</span>
+          <MyButton tip="comments">
+            <ChatIcon color="primary"></ChatIcon>
+          </MyButton>
+          <span>{commentCount} comments</span>
         </Grid>
       </Grid>
     );

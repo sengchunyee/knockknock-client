@@ -6,7 +6,6 @@ import {
   LOADING_DATA,
   DELETE_POST,
   NEW_POST,
-  STOP_LOADING_UI,
 } from "../types";
 
 const initialState = {
@@ -27,6 +26,9 @@ export default function (state = initialState, action) {
         (post) => post.postId === action.payload.postId
       );
       state.posts[index] = action.payload;
+      if (state.post.postId === action.payload.postId) {
+        state.post = action.payload;
+      }
       return { ...state };
     case LOADING_DATA:
       return { ...state, loading: true };
