@@ -6,7 +6,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import Dialog from "@material-ui/core/Dialog";
 import MyButton from "../../util/MyButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { getPost } from "../../redux/actions/dataAction";
+import { getPost, clearErrors } from "../../redux/actions/dataAction";
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import dayjs from "dayjs";
@@ -16,6 +16,7 @@ import ChatIcon from "@material-ui/icons/Chat";
 import Grid from "@material-ui/core/Grid";
 import LikeButton from "./LikeButton";
 import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
@@ -50,6 +51,7 @@ class PostDialog extends Component {
   };
   toggleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
 
   componentDidMount() {
@@ -103,6 +105,7 @@ class PostDialog extends Component {
           <span>{commentCount} comments</span>
         </Grid>
         <hr className={classes.visibleSeperator} />
+        <CommentForm postId={postId} />
         <Comments comments={comments} />
       </Grid>
     );
@@ -138,11 +141,12 @@ PostDialog.propTypes = {
   postId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   UI: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({ UI: state.UI, post: state.data.post });
 
-const mapActionsToProps = { getPost };
+const mapActionsToProps = { getPost, clearErrors };
 export default connect(
   mapStateToProps,
   mapActionsToProps

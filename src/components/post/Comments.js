@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
-import Avatar from "@material-ui/core/Avatar";
 const styles = (theme) => ({
   ...theme.spreadIt,
   commentData: { marginLeft: 20 },
