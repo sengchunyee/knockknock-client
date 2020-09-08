@@ -3,33 +3,24 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 import { connect } from "react-redux";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import MyButton from "../util/MyButton";
+import MyButton from "../../util/MyButton";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { getPost } from "../redux/actions/dataAction";
-import AddIcon from "@material-ui/icons/Add";
+import { getPost, clearErrors } from "../../redux/actions/dataAction";
 import CloseIcon from "@material-ui/icons/Close";
 import UnfoldMore from "@material-ui/icons/UnfoldMore";
 import dayjs from "dayjs";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import relativeTime from "dayjs/plugin/relativeTime";
-import { likePost, unlikePost } from "../redux/actions/dataAction";
 import ChatIcon from "@material-ui/icons/Chat";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import Favorite from "@material-ui/icons/Favorite";
-import DeletePost from "../components/DeletePost";
 import Grid from "@material-ui/core/Grid";
+import LikeButton from "./LikeButton";
+import Comments from "./Comments";
+import CommentForm from "./CommentForm";
 
 const styles = (theme) => ({
   ...theme.spreadIt,
-  invisibleSeperator: { border: "none", margin: "4" },
+
   userImage: {
     height: 200,
     maxWidth: 200,
@@ -60,6 +51,7 @@ class PostDialog extends Component {
   };
   toggleClose = () => {
     this.setState({ open: false });
+    this.props.clearErrors();
   };
 
   componentDidMount() {
@@ -76,6 +68,7 @@ class PostDialog extends Component {
         commentCount,
         userHandle,
         userImage,
+        comments,
       },
       UI: { loading },
     } = this.props;
@@ -104,7 +97,16 @@ class PostDialog extends Component {
           </Typography>
           <hr className={classes.invisibleSeperator} />
           <Typography variant="body1">{body}</Typography>
+          <LikeButton postId={postId} />
+          <span>{likeCount} Likes</span>
+          <MyButton tip="comments">
+            <ChatIcon color="primary"></ChatIcon>
+          </MyButton>
+          <span>{commentCount} comments</span>
         </Grid>
+        <hr className={classes.visibleSeperator} />
+        <CommentForm postId={postId} />
+        <Comments comments={comments} />
       </Grid>
     );
     return (
@@ -139,11 +141,12 @@ PostDialog.propTypes = {
   postId: PropTypes.string.isRequired,
   userHandle: PropTypes.string.isRequired,
   UI: PropTypes.object.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({ UI: state.UI, post: state.data.post });
 
-const mapActionsToProps = { getPost };
+const mapActionsToProps = { getPost, clearErrors };
 export default connect(
   mapStateToProps,
   mapActionsToProps

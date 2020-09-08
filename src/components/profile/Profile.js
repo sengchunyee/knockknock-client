@@ -13,9 +13,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import KeyBoardReturn from "@material-ui/icons/KeyboardReturn";
 import dayjs from "dayjs";
-import { logoutUser, uploadImage } from "../redux/actions/userAction";
-import EditProfile from "../components/EditProfile";
-import MyButton from "../util/MyButton";
+import { logoutUser, uploadImage } from "../../redux/actions/userAction";
+import EditProfile from "./EditProfile";
+import MyButton from "../../util/MyButton";
 const styles = (theme) => ({ ...theme.spreadIt });
 
 class Profile extends Component {

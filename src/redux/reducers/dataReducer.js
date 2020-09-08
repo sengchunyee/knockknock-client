@@ -6,7 +6,7 @@ import {
   LOADING_DATA,
   DELETE_POST,
   NEW_POST,
-  STOP_LOADING_UI,
+  SUBMIT_COMMENT,
 } from "../types";
 
 const initialState = {
@@ -27,6 +27,9 @@ export default function (state = initialState, action) {
         (post) => post.postId === action.payload.postId
       );
       state.posts[index] = action.payload;
+      if (state.post.postId === action.payload.postId) {
+        state.post = action.payload;
+      }
       return { ...state };
     case LOADING_DATA:
       return { ...state, loading: true };
@@ -38,6 +41,14 @@ export default function (state = initialState, action) {
       return { ...state };
     case NEW_POST:
       return { ...state, posts: [action.payload, ...state.posts] };
+    case SUBMIT_COMMENT:
+      return {
+        ...state,
+        post: {
+          ...state.post,
+          comments: [action.payload, ...state.post.comments],
+        },
+      };
     default:
       return state;
   }
